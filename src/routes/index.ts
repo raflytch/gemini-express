@@ -1,9 +1,9 @@
-import { Router, Request, Response } from "express";
+import { Router, Response, Request } from "express";
 import generateRoutes from "./generate.route";
 
 const router = Router();
 
-router.get("/", (req: Request, res: Response) => {
+router.get("/", (_req: Request, res: Response): void => {
   res.json({ message: "API is running" });
 });
 

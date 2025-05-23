@@ -1,16 +1,16 @@
-import { Router } from 'express';
-import { createGenerateController } from '../controllers/generate.controller';
-import { generateRateLimiter } from '../middlewares/rate-limiter';
-import { validateGenerateRequest } from '../validator/generate.validator';
+import { Router } from "express";
+import { createGenerateController } from "../controllers/generate.controller";
+import { generateRateLimiter } from "../middlewares/rate-limiter";
+import { validateGenerateRequest } from "../validator/generate.validator";
 
 const router = Router();
-const generateController = createGenerateController();
+const controller = createGenerateController();
 
 router.post(
-  '/content',
+  "/content",
   generateRateLimiter,
   validateGenerateRequest,
-  (req, res) => generateController.generateContent(req, res)
+  controller.generateContent
 );
 
 export default router;
