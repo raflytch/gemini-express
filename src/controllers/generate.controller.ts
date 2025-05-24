@@ -6,6 +6,7 @@ import {
 } from "../common/types/generate.type";
 
 export const createGenerateController = () => {
+  // Initialize service
   const generateService = createGenerateService();
 
   const generateContent = async (
@@ -13,10 +14,13 @@ export const createGenerateController = () => {
     res: Response
   ): Promise<void> => {
     try {
+      // Extract prompt from request
       const { prompt } = req.body as GenerateRequest;
 
+      // Generate content using service
       const generatedContent = await generateService.generateContent(prompt);
 
+      // Create success response
       const response: GenerateResponse = {
         success: true,
         data: generatedContent,
@@ -24,6 +28,7 @@ export const createGenerateController = () => {
 
       res.status(200).json(response);
     } catch (error) {
+      // Handle errors
       const err = error as Error;
       const response: GenerateResponse = {
         success: false,

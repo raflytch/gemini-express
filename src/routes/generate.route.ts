@@ -3,14 +3,17 @@ import { createGenerateController } from "../controllers/generate.controller";
 import { generateRateLimiter } from "../middlewares/rate-limiter";
 import { validateGenerateRequest } from "../validator/generate.validator";
 
+// Create router
 const router = Router();
+// Initialize controller
 const controller = createGenerateController();
 
+// Configure POST endpoint with middleware
 router.post(
   "/content",
-  generateRateLimiter,
-  validateGenerateRequest,
-  controller.generateContent
+  generateRateLimiter, // Limit requests
+  validateGenerateRequest, // Validate input
+  controller.generateContent // Process request
 );
 
 export default router;
